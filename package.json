@@ -1,8 +1,8 @@
 {
-  "name": "react-hw-06-phonebook",
+  "name": "react-hw-07-phonebook",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://VinokurovAleksandr.github.io/React-hw-06-phonebook/",
+  "homepage": "https://VinokurovAleksandr.github.io/React-hw-07-phonebook/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.3",
@@ -13,6 +13,7 @@
     "prop-types": "^15.8.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-loader-spinner": "^5.4.5",
     "react-redux": "^8.1.2",
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",

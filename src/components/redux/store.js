@@ -1,5 +1,5 @@
 // import { combineReducers } from 'redux';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 // import contactsReduser from './contacts-actions/contacts-reducer';
 import {
     FLUSH,
@@ -14,7 +14,8 @@ import persistStore from 'redux-persist/es/persistStore';
 
 import { persistedContactReducer } from '../redux/contactsSlise';
 import { filterReducer } from '../redux/filterSlise';
-
+import {contactsApi} from '../services/contactsApi'
+import { setupListeners } from '@reduxjs/toolkit/dist/query';
 
 // const contactsPersistConfig = {
 //     key: 'contacts',
@@ -22,11 +23,15 @@ import { filterReducer } from '../redux/filterSlise';
 //     blacklist: ['filter'],
 // };
 
-const middleware = getDefaultMiddleware({
-    serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-    }
-});
+// const middleware = getDefaultMiddleware({
+//     serializableCheck: {
+//         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+       
+//     },
+//     contactsApi,
+    
+    
+// });
 
 
 // const rootReducer = combineReducers({
@@ -38,13 +43,21 @@ const middleware = getDefaultMiddleware({
 
 export const store = configureStore({
     reducer: {
-        contacts: persistedContactReducer,
-        filter: filterReducer,
+        // contacts: persistedContactReducer,
+        // filter: filterReducer,
+        [contactsApi.reducerPath]: contactsApi.reducer,
+
     },
-    middleware,
-  
+    // middleware: getDefaultMiddleware => [
+    //     ...getDefaultMiddleware(),
+    //     contactsApi.middleware  
+    // ]
+      middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(contactsApi.middleware),
 });
 
-export const persistor = persistStore(store);
+// export const persistor = persistStore(store);
+
+setupListeners(store.dispatch)
 
 // eslint-disable-next-line import/no-anonymous-default-export

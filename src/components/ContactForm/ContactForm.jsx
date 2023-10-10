@@ -5,78 +5,99 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import style from '../ContactForm/style.module.css';
 import { getContacts, addContacts } from '../redux/contactsSlise';
+import { Spinner } from '../Spinner/Spiner';
 
 import { nanoid } from 'nanoid';
 import Notiflix from 'notiflix';
-// import PropTypes from 'prop-types';
+
+import {useCreateContactMutation} from '../services/contactsApi';   
 
 
 
 
 export default function ContactForm() {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  // const [name, setName] = useState('');
+  // const [number, setNumber] = useState('');
 
-  const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  // const dispatch = useDispatch();
+  // const contacts = useSelector(getContacts);
 
 
-  
-   const handleSubmit = e => {
-     e.preventDefault();
+  const [createContact, {isLoading}] = useCreateContactMutation();
+  //  const handleSubmit = e => {
+  //    e.preventDefault();
      
-     if (contacts.some(({ name }) => name === name.toLowerCase())) {
-       Notiflix.Notify.warning(
-         `Conatct ${name} is already in your cotacts list`
-       );
-       return;
-    }
+    //  if (contacts.some(({ name }) => name === name.toLowerCase())) {
+    //    Notiflix.Notify.warning(
+    //      `Conatct ${name} is already in your cotacts list`
+    //    );
+    //    return;
+    // }
 
     //  onSubmit({ id: nanoid(), name, number })
-     dispatch(addContacts({
-       name: name,
-       number,
-       id: nanoid()
-     }));
+    //  dispatch(addContacts({
+    //    name: name,
+    //    number,
+    //    id: nanoid()
+    //   }));
+    //  createContact(e.target.elements.value)
 
-        resetForm();
-    };
+   
+    
 
-  const resetForm = () => {
-    setName('');
-    setNumber('');
-    };
+    //     resetForm();
+    // };
+
+  // const resetForm = () => {
+  //   setName('');
+  //   setNumber('');
+  //   };
   
-  const handleChangeAddContacts = e => {
-    const { name, value } = e.target;
+  // const handleChangeAddContacts = e => {
+  //   const { name, value } = e.target;
 
-    switch (name) {
-      case 'name':
-        setName(value)
-        break;
-      case 'number':
-        setNumber(value)
-        break;
+  //   switch (name) {
+  //     case 'name':
+  //       setName(value)
+  //       break;
+  //     case 'number':
+  //       setNumber(value)
+  //       break;
 
-      default:
-        return;
-    }
+  //     default:
+  //       return;
+  //   }
+  // };
+  
+
+  const handleSubmit = (name, number) => {
+    e.preventDefault();
+
+    const name = value.name;
+    const number = value.number;
+
+    console.log(e.target.elements.value);
+    // console.log(e.currentTarget.elements.number.value);
+    createContact(name, number )
+    // e.target.reset();
   };
-  
-  
+
+
   return ( 
-             <form
+    <>
+       <form
           className={style.form_phonebook}
           onSubmit={handleSubmit}
         >
-          <label
+        <label
+          type='text'
             className={style.label_name}
-            htmlFor={name}
+            // htmlFor={name}
           >Name
             <input
             type="text"
-              value={name}
-              onChange={handleChangeAddContacts}
+              // value={name}
+              // onChange={handleChangeAddContacts}
               // id={name}
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -86,14 +107,14 @@ export default function ContactForm() {
           </label>
             <label
               className={style.label_name}
-          htmlFor={number}
+          // htmlFor={number}
           >
             Number
            <input
               type="tel"
               // id={number}
-              value={number}
-              onChange={handleChangeAddContacts}
+              // value={number}
+              // onChange={handleChangeAddContacts}
               name="number"
               pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
@@ -101,12 +122,17 @@ export default function ContactForm() {
             />
           </label>
           
-          <button
+        <button 
+            disabled={isLoading}
             className={style.formBtn}
-            type="submit">Add contact</button>  
+            type="submit">
+          {isLoading ? <Spinner /> : ' Add contact'} 
+           
+        </button>  
         </form>
-         );
-  
+    </>
+            
+         ); 
 };
 
 

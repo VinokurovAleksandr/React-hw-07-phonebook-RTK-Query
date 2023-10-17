@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 // import { nanoid } from 'nanoid';
 
 import style from './style.module.css';
 
-import ContactForm from './ContactForm/ContactForm';
+import {ContactForm} from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from "./ContactList/ContactList";
 // import initialContacts from '../components/initialContacts.json'
@@ -58,7 +58,7 @@ export default function App ()  {
   // const visibleContacts = () => {
   //   const normalizedContacts = filter.toLowerCase();
 
-  //   return contacts.filter(contact =>
+  //   return contact.filter(contact =>
   //     contact.name.toLowerCase().includes(normalizedContacts))
   // };
   
@@ -66,27 +66,46 @@ export default function App ()  {
   // const visibleCont = visibleContacts();
 
   return (
-      <div className={style.phonebook}>
-         <h2>
+ 
+          <div className={style.phonebook}>
+          <h2>
           Phonebook
-        </h2>
-        {/* <ContactForm onSubmit={addContact} /> */}
-        <ContactForm />
+         </h2>
+         <ContactForm />
         
-            <div>
+             <div>
           <h2 className={style.name}>Contacts</h2>
-          {/* <Filter value={filter} onChange={handleChangeContacts} /> */}
+           {/* <Filter value={filter} onChange={handleChangeContacts} /> */}
           <Filter  />
-          <ContactList
+           <ContactList
             // visibleCont={visibleCont}
             // deleteContacts={OnDeleteContacts}
           />
       </div>
-         </div>
-    )
+         </div> 
 
+    )
   };
 
 
 
 // export default connect()App();
+
+
+  // <div className={style.phonebook}>
+  //         <h2>
+  //         Phonebook
+  //        </h2>
+  //        {/* <ContactForm onSubmit={addContact} /> */}
+  //        <ContactForm />
+        
+  //            <div>
+  //         <h2 className={style.name}>Contacts</h2>
+  //          {/* <Filter value={filter} onChange={handleChangeContacts} /> */}
+  //         <Filter  />
+  //          <ContactList
+  //           // visibleCont={visibleCont}
+  //           // deleteContacts={OnDeleteContacts}
+  //         />
+  //     </div>
+  //        </div> 

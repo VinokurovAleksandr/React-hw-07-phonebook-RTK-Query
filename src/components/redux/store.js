@@ -44,7 +44,7 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query';
 export const store = configureStore({
     reducer: {
         // contacts: persistedContactReducer,
-        // filter: filterReducer,
+        filter: filterReducer,
         [contactsApi.reducerPath]: contactsApi.reducer,
 
     },

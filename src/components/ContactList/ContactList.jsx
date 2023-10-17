@@ -15,43 +15,8 @@ const ContactList = () => {
     const [deleteContact, { isLoading: isDeleting }] = useDeleteCotnactMutation();
     
 
-    
-    
-//     const dispatch = useDispatch();
-//     const contacts = useSelector(getContacts);
-//     const filter = useSelector(getFilter);
-
-  
-
-// const visibleCont = contacts.filter(contact => {
-//     if (typeof contact.name === 'string') {
-//         const normalizedName = contact.name.toLowerCase();
-//         return normalizedName.includes(filter.toLowerCase()) ||
-//             contact.number.includes(filter);
-//     }
-//     return false; 
-// });
-
-
-
-
     return (
-        // <ul
-        // className={style.list}>
-        //     {contacts.map(
-        //         ({ name, id, number }) => (
-        //              <li
-        //                 className={style.item}
-        //                 key={id}>
-        //             <p>
-        //                 {name}: {number}
-        //             </p>
-        //                 <button></button>
-        //             </li>
-        //         )
 
-        //     )}
-        // </ul>
 
         <div>
             {isFetching && <Spinner size='12'/>}
@@ -102,11 +67,7 @@ const ContactList = () => {
 //     };
 // };
 
-// const mapDispatchToProps = dispatch => ({
-   
-//     deleteContacts: id => dispatch(contactsActions.deleteContacts(id)),
 
-// });
 
 
 

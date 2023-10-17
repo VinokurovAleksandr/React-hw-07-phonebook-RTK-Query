@@ -16,7 +16,7 @@ export default function Filter() {
 
     return (
         <label
-            className={style.find_contacts}
+        className={style.find_contacts}
         type='name'
         value={filter}
         onChange={onChange}
